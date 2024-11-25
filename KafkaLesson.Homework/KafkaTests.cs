@@ -46,8 +46,9 @@ public class KafkaTests
 
     private async Task WaitForConsume(int expectedConsumedEventCount)
     {
-        await Task.CompletedTask;
-        
-        // TODO add logic
+        while (EventStorage.Instance.GetAllConsumedEvents().Count < expectedConsumedEventCount)
+        {            
+            await Task.Delay(500);
+        }
     }
 }
